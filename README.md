@@ -1,6 +1,9 @@
-# Скрипт установки Grafana
+# Скрипты установки Grafana
 
-Этот скрипт автоматизирует установку Grafana на серверах с ОС Ubuntu или AlmaLinux.
+В этом репозитории два скрипта для автоматизации установки Grafana на серверах с ОС Ubuntu или AlmaLinux:
+
+- `install_grafana.sh` — базовая установка Grafana.
+- `install_grafana_for_prometheus.sh` — установка Grafana с автоматическим добавлением источника данных Prometheus.
 
 ## Особенности
 
@@ -8,6 +11,7 @@
 - Установка необходимых пакетов и репозиториев.
 - Настройка firewall (для AlmaLinux).
 - Автоматический запуск и включение Grafana.
+- Для скрипта `install_grafana_for_prometheus.sh`: автоматическое добавление Prometheus как источника данных (адрес Prometheus указывается в переменной `PROMETHEUS_URL`).
 
 ## Требования
 
@@ -16,14 +20,27 @@
 
 ## Использование
 
+### Обычная установка Grafana
+
 1. Сделайте скрипт исполняемым:
    ```bash
    chmod +x install_grafana.sh
    ```
-
 2. Запустите скрипт:
    ```bash
    sudo ./install_grafana.sh
+   ```
+
+### Установка Grafana с Prometheus
+
+1. При необходимости отредактируйте переменную `PROMETHEUS_URL` в начале скрипта.
+2. Сделайте скрипт исполняемым:
+   ```bash
+   chmod +x install_grafana_for_prometheus.sh
+   ```
+3. Запустите скрипт:
+   ```bash
+   sudo ./install_grafana_for_prometheus.sh
    ```
 
 ## Примечания
