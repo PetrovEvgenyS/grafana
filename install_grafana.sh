@@ -45,7 +45,7 @@ install_grafana_ubuntu() {
 
   # Установите необходимые пакеты:
   apt update
-  apt install -y apt-transport-https software-properties-common wget \ 
+  apt install -y apt-transport-https software-properties-common wget \
     || { errorprint "Не удалось установить необходимые пакеты"; exit 1; }
   
   # Импортируйте ключ GPG (возможно, потребуется VPN):
@@ -71,7 +71,7 @@ install_grafana_almalinux() {
 
   # Импортируйте ключ GPG:
   wget -q -O /tmp/gpg.key https://rpm.grafana.com/gpg.key
-  rpm --import /tmp/gpg.key
+  rpm --import gpg.key || { errorprint "Не удалось импортировать GPG ключ"; exit 1; }
   rm -f /tmp/gpg.key
 
   # Добавление репозитория Grafana:
