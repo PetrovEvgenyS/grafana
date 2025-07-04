@@ -11,7 +11,7 @@
 - Установка необходимых пакетов и репозиториев.
 - Настройка firewall (для AlmaLinux).
 - Автоматический запуск и включение Grafana.
-- Для скрипта `install_grafana_for_prometheus.sh`: автоматическое добавление Prometheus как источника данных (адрес Prometheus указывается в переменной `PROMETHEUS_URL`).
+- Для скрипта `install_grafana_for_prometheus.sh`: автоматическое добавление Prometheus как источника данных (адрес Prometheus указывается первым аргументом при запуске скрипта).
 
 ## Требования
 
@@ -33,14 +33,13 @@
 
 ### Установка Grafana с Prometheus
 
-1. При необходимости отредактируйте переменную `PROMETHEUS_URL` в начале скрипта.
-2. Сделайте скрипт исполняемым:
+1. Сделайте скрипт исполняемым:
    ```bash
    chmod +x install_grafana_for_prometheus.sh
    ```
-3. Запустите скрипт:
+2. Запустите скрипт, указав адрес Prometheus первым аргументом:
    ```bash
-   sudo ./install_grafana_for_prometheus.sh
+   sudo ./install_grafana_for_prometheus.sh http://10.100.10.5:9090
    ```
 
 ## Примечания
