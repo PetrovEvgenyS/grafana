@@ -10,8 +10,13 @@ magentaprint() { printf "${MAGENTA}%s${RESET}\n" "$1"; }
 errorprint() { printf "${RED}%s${RESET}\n" "$1"; }
 greenprint() { printf "${GREEN}%s${RESET}\n" "$1"; }
 
-# Указываем адрес сервера PROMETHEUS
-PROMETHEUS_URL="http://10.100.10.5:9090"
+# Проверка аргумента PROMETHEUS_URL
+if [ -z "$1" ]; then
+    errorprint "Необходимо указать адрес Prometheus первым аргументом!"
+    magentaprint "Пример: $0 http://10.100.10.5:9090"
+    exit 1
+fi
+PROMETHEUS_URL="$1"
 
 # -------------------------------------------------------------------------------- #
 
@@ -48,7 +53,7 @@ install_grafana_ubuntu() {
   
   # Установите необходимые пакеты:
   apt update
-  apt install -y apt-transport-https software-properties-common wget \ 
+  apt install -y apt-transport-https software-properties-common wget \
     || { errorprint "Не удалось установить необходимые пакеты"; exit 1; }
   
   # Импортируйте ключ GPG (возможно, потребуется VPN):
@@ -74,7 +79,7 @@ install_grafana_almalinux() {
 
   # Импортируйте ключ GPG:
   wget -q -O gpg.key https://rpm.grafana.com/gpg.key
-  rpm --import gpg.key
+  rpm --import gpg.key || { errorprint "Не удалось импортировать GPG ключ"; exit 1; }
   rm -f /tmp/gpg.key
 
   # Добавление репозитория Grafana:
