@@ -3,14 +3,12 @@
 # https://grafana.com/docs/grafana/latest/setup-grafana/installation/
 
 ### ЦВЕТА ##
-ESC=$(printf '\033') RESET="${ESC}[0m" BLACK="${ESC}[30m" RED="${ESC}[31m"
-GREEN="${ESC}[32m" YELLOW="${ESC}[33m" BLUE="${ESC}[34m" MAGENTA="${ESC}[35m"
-CYAN="${ESC}[36m" WHITE="${ESC}[37m" DEFAULT="${ESC}[39m"
+ESC=$(printf '\033') RESET="${ESC}[0m" MAGENTA="${ESC}[35m" RED="${ESC}[31m" GREEN="${ESC}[32m"
 
-### Цветные функции ##
+### Функции цветного вывода ##
 magentaprint() { printf "${MAGENTA}%s${RESET}\n" "$1"; }
-errorprint() { printf "${RED}%s${RESET}\n" "$@"; }
-greenprint() { printf "${GREEN}%s${RESET}\n" "$@"; }
+errorprint() { printf "${RED}%s${RESET}\n" "$1"; }
+greenprint() { printf "${GREEN}%s${RESET}\n" "$1"; }
 
 # -------------------------------------------------------------------------------- #
 
@@ -57,7 +55,7 @@ install_grafana_ubuntu() {
   # Добавление репозитория Grafana
   echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | tee -a /etc/apt/sources.list.d/grafana.list
 
-  # Установите необходимые пакеты:
+  # Обновление списка пакетов:
   apt update
   # Установка Grafana:
   apt install -y grafana
