@@ -10,11 +10,13 @@ magentaprint() { printf "${MAGENTA}%s${RESET}\n" "$1"; }
 errorprint() { printf "${RED}%s${RESET}\n" "$1"; }
 greenprint() { printf "${GREEN}%s${RESET}\n" "$1"; }
 
+
 # -------------------------------------------------------------------------------- #
 
-# Проверка прав root
-if [ "$(id -u)" -ne 0 ]; then
-    errorprint "Этот скрипт должен запускаться с правами root или через sudo!"
+
+# Проверка запуска через sudo
+if [ -z "$SUDO_USER" ]; then
+    errorprint "Пожалуйста, запустите скрипт через sudo."
     exit 1
 fi
 
